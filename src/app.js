@@ -79,13 +79,13 @@ app.post('/repositories/:id/like', (request, response) => {
     return response
       .status(400)
       .json({ error: 'Repository not found. Did you type the correct id?' });
+  } else {
+    const updatedRepository = { id, title, url, techs, likes: likes + 1 };
+
+    repositories[repositoryIndex] = updatedRepository;
+
+    return response.json(updatedRepository);
   }
-
-  const updatedRepository = { id, title, url, techs, likes: likes + 1 };
-
-  repositories[repositoryIndex] = updatedRepository;
-
-  return response.json(updatedRepository);
 });
 
 module.exports = app;
