@@ -68,8 +68,6 @@ app.post('/repositories/:id/like', (request, response) => {
 
   const repository = repositories.find((repository) => repository.id == id);
 
-  let { title, url, techs, likes } = repository;
-
   const repositoryIndex = repositories.findIndex(
     (repository) => repository.id == id
   );
@@ -79,6 +77,9 @@ app.post('/repositories/:id/like', (request, response) => {
       .status(400)
       .json({ error: 'Repository not found. Did you type the correct id?' });
   }
+
+  let { title, url, techs, likes } = repository;
+
   const updatedRepository = { id, title, url, techs, likes: likes + 1 };
 
   repositories[repositoryIndex] = updatedRepository;
